@@ -6,6 +6,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'Bike.dart';
+import 'HomePageDetail.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // Membuat List Dari data Internet
   List<Bike> listModel = [];
   var loading = false;
 
@@ -36,7 +36,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  //Panggil Data / Call Data
   @override
   void initState() {
     // TODO: implement initState
@@ -59,32 +58,30 @@ class _HomePageState extends State<HomePage> {
                     itemBuilder: (context, i) {
                       final nDataList = listModel[i];
                       return Container(
+                          decoration: BoxDecoration(
+                              border:  Border(
+                                  bottom: BorderSide()),
+                            borderRadius: BorderRadius.circular(10)),
                           padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                           height: 100,
-                          // child: InkWell(
+                           child: InkWell(
 
-//                  onTap: (){
-//                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePageDetail(
-//                      dName: nDataList.manufacturer,
-//                      dEmail: nDataList.model,
-//                      dPhone: nDataList.wheels,
-//                      dCity: nDataList.address.city,
-//                      dZip: nDataList.address.zipcode,
-//                    )));
-//                  },
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePageDetail(
 
-                          child: Column(children: <Widget>[
-                            Container(
+                    )));
+                  },
+
+                          child: Row(children: <Widget>[
+                             Container(
                               child: nDataList.foto1 != ''
                                   ? Image(
-                                      //image: NetworkImage(nDataList.foto1)): " ",
                                       image: NetworkImage(nDataList.foto1))
-                                  : " ",
+                                  : null,
                               height: 100,
                               width: 100,
                             ),
                             Card(
-                              color: Colors.amber[100],
                               margin: EdgeInsets.all(15),
                               child: Padding(
                                 padding: EdgeInsets.all(16),
@@ -108,7 +105,9 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                          ]));
+
+                          ]),
+                      ));
                     })));
   }
 }
